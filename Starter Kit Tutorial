@@ -1,0 +1,142 @@
+Starter Kit Tutorial
+
+Steps
+
+Download/install Visual Studio Code
+
+https://code.visualstudio.com/
+
+Install AliOS Studio plug-in
+
+1. Install C/C++ plug-in 
+2. install alios-studio plug-in 
+
+If you have already installed, please make sure that its version is higher than 0.7.1
+
+Development environment preparation
+
+Linux/Mac
+
+Refer to AliOS-Things-Linux-Environment-Setup
+
+Install :
+
+- GNU ARM Embedded Toolchain
+- Python 2
+- Git
+
+Install python pip manager and install/upgrade  aos-cube  to global environment: pip install -U aos-cube
+
+aos-cube version >= 0.2.22
+
+We recommend you to use serial tool minicom or picocom.
+
+Windows
+
+Refer to AliOS-Things-Windows-Environment-Setup
+
+You can directly use the software package we have prepared : http://p28phe5s5.bkt.clouddn.com/setup_windows.zip>
+
+You can also install the following software/tool : 
+
+- GNU ARM Embedded Toolchain
+- Python 2
+- Git
+- ST-LINK USB Driver
+
+After Python 2 and Git have been installed, install/upgrade aos-cube: pip install -U aos-cube in Git Bash 
+
+aos-cube version >= 0.2.22
+
+Download AliOS Things code
+
+Copy from GitHub : git clone https://github.com/alibaba/AliOS-Things.git
+
+Or from mirror site : git clone https://code.aliyun.com/vivid8710/AliOS-Things.git
+
+Start compiling helloworld
+
+1. Open AliOS Things code directory in Visual Studio Code 
+2. Click   to start compiling. If toolchain is not found, it will be download to correct location.
+
+If toolchain is still not found after configuring, you can add arm-none-eabi- to global PATH.
+
+If not, you can copy the toolchain to the following path, or create symbolic link in the following link as long as toolchain exists in that path :
+
+AliOS-Things/build/compiler/arm-none-eabi-5_4-2016q3-20160926/OSX/
+
+AliOS-Things/build/compiler/arm-none-eabi-5_4-2016q3-20160926/Win32/
+
+AliOS-Things/build/compiler/arm-none-eabi-5_4-2016q3-20160926/Linux64/
+
+    ../OSX
+    ../Win32
+    ../Linux64
+    ├── arm-none-eabi/
+    ├── bin/
+    ├── lib/
+    └── share/
+    
+
+1. Occupation status of each component will be shown after compiling :
+
+Program to Starter Kit
+
+1. Connect Starter Kit with your computer trough USB Micro line.
+2. Click  at the bottom to complete hardware programming. 
+
+Open the serial port, and you can see app_delayed_action start in one second and it will be triggered every  seconds.
+
+     [   1.000]<V> AOS [app_delayed_action#9] : app_delayed_action:9 app
+     [   6.000]<V> AOS [app_delayed_action#9] : app_delayed_action:9 app
+     [  11.000]<V> AOS [app_delayed_action#9] : app_delayed_action:9 app
+     [  16.000]<V> AOS [app_delayed_action#9] : app_delayed_action:9 app
+    
+
+GUI application case
+
+Double click on  starterkitgui@starterkit in BUILD TARGET  on the left to start compiling GUI demo OF Starter Kit . When Starter Kit is connected to the computer through USB, click on Upload  to program the hardware.  
+
+The demo will read real-time data of accelerometer and draw a picture displayed in LCD. 
+
+Debug
+
+Debug the configuration
+
+Click on the bottom on the left to switch to Debug page.
+
+
+
+Mac/Linux
+
+Select  Debug @ Mac/Linux .
+
+Update AliOS-Things/.vscode/launch.json  debug configuration file based on compiled and burned app@board. For example,  modify related configuration after compiling and programing   starterkitgui@starterkit.
+
+Windows
+
+Debugging in Windows is similar to configuration in Mac/Linux. The difference is that you need to select  Debug @ Windows and modify the path of program to a mirror file corresponding to the programed firmware, as shown in the following picture：
+
+    "program": "D:\\work\\AliOS-Things\\out\\starterkitgui@starterkit\\binary\\starterkitgui@starterkit.elf"
+    
+
+
+
+Start debugging
+
+Click the green ▶️ button in the top left corner (or F5) to start debugging.
+
+According to the setting in  launch.json 
+
+    "text": "break application_start"
+    
+
+After debugging, it will automatically turn to the set breakpoint application_start , and debug toolbar will appear on the top to provide commonly-used single step debugging functions, as shown in the picture : 
+
+Similarly, you can right click to selectRun to Cursor :
+
+You can see variable values in the left view area : 
+
+Complete debugging
+
+So far, the basic debugging process has been completed. You can click on the red stop key on the upper toolbar to end debugging. 
